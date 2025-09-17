@@ -1,4 +1,3 @@
-// src/App.jsx
 import { Routes, Route, NavLink } from 'react-router-dom'
 import Contact from './pages/Contact.jsx'
 import Register from './pages/Register.jsx'
@@ -26,7 +25,6 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/success" element={<Success />} />
-
         </Routes>
       </main>
     </>
