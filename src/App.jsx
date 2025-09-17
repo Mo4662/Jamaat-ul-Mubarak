@@ -26,6 +26,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/success" element={<Success />} />
+
         </Routes>
       </main>
     </>

@@ -1,36 +1,79 @@
-// src/pages/Contact.jsx
+import { useState } from 'react'
+
+// helper to URL-encode form data
+const encode = (data) =>
+  Object.keys(data)
+    .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+    .join('&')
+
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    message: '',
+    'bot-field': '' // honeypot
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setForm((f) => ({ ...f, [name]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (form['bot-field']) return // spam bot fell in
+
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': 'contact',   // must match the form's name attribute
+        ...form
+      })
+    })
+
+    window.location = '/success'
+  }
+
   return (
     <main className="section">
       <div className="container">
         <h1>Contact us</h1>
         <form
-          name="contact"
+          name="contact"                 // matches form-name hidden field
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
-          action="/success"
+          onSubmit={handleSubmit}
         >
+          {/* Netlify needs this hidden field to associate submission */}
           <input type="hidden" name="form-name" value="contact" />
+
+          {/* honeypot field (hidden visually, but present in DOM) */}
           <p hidden>
-            <label>Don’t fill this out: <input name="bot-field" /></label>
+            <label>
+              Don’t fill this out: <input name="bot-field" onChange={handleChange} />
+            </label>
           </p>
 
-          <label>Name
-            <input name="name" required />
+          <label>
+            Name
+            <input name="name" value={form.name} onChange={handleChange} required />
           </label>
 
-          <label>Email
-            <input type="email" name="email" required />
+          <label>
+            Email
+            <input type="email" name="email" value={form.email} onChange={handleChange} required />
           </label>
 
-          <label>Message
-            <textarea name="message" rows="5" required />
+          <label>
+            Message
+            <textarea name="message" rows="5" value={form.message} onChange={handleChange} required />
           </label>
 
           <button type="submit">Send</button>
         </form>
       </div>
     </main>
-  );
+  )
 }

@@ -1,4 +1,3 @@
-// src/pages/Success.jsx
 export default function Success() {
   return (
     <main className="section">
@@ -7,5 +6,5 @@ export default function Success() {
         <p>We received your submission and will get back to you soon.</p>
       </div>
     </main>
-  );
+  )
 }
