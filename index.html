@@ -2,12 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jamaat-ul-Mubarak</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+
+    <!-- Basic SEO / social (update the URLs later if you add a custom domain) -->
+    <meta name="description" content="Community-driven nonprofit. Join, volunteer, make impact.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Jamaat-ul-Mubarak">
+    <meta property="og:description" content="Community-driven nonprofit. Join, volunteer, make impact.">
+    <meta property="og:image" content="/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Netlify Form Detectors (hidden; lets Netlify know your schema) -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <form name="register" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="firstName" />
+      <input name="lastName" />
+      <input type="email" name="email" />
+    </form>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
